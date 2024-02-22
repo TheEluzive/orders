@@ -9,25 +9,15 @@ import java.time.LocalDate;
 @NoArgsConstructor
 @Getter
 @Setter
-@Builder
+//@Builder
 @Entity
-public class ProductOffer {
-    @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id",unique=true, nullable = false)
-    private Long id;
+public class ProductOffer extends BaseProduct{
+//    @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
+//    @Column(name = "id",unique=true, nullable = false)
+//    private Long id;
 
-
-    private String name;
-
-    @ManyToOne
-    private Category category; //todo: new Entity
 
     private Long price;
-
-    private Long weight;
-
-    private Long amount;
-
 
     private LocalDate fromDate;
 

@@ -18,18 +18,23 @@ public class ProductService {
     public List<ProductOffer> register(Long providerId, List<ProductDto> products) {
         Provider provider = providerService.getProviderById(providerId);
         List<ProductOffer> productOfferList = products.stream()
-                .map(p -> ProductOffer.builder()
-                        .name(p.getName())
-                        .category(categoryService.getOrAdd(p.getCategory()))
-                        .price(p.getPrice())
-                        .weight(p.getWeight())
-                        .amount(p.getAmount())
-                        .fromDate(p.getFromDate())
-                        .toDate(p.getToDate())
-                        .provider(provider)
-                        .build()
+                .map(p -> {
+                    ProductOffer offer = new ProductOffer();
+                    offer.setName(p.getName());
+                    offer.setCategory(categoryService.getOrAdd(p.getCategory()));
+                    offer.setPrice(p.getPrice());
+                    offer.setWeight(p.getWeight());
+                    offer.setProvider(provider);
+                    offer.setToDate(p.getToDate());
+                    offer.setFromDate(p.getFromDate());
+                    return offer;
+                }
                 ).collect(Collectors.toList());
         return productRepository.saveAll(productOfferList);
+    }
+
+    public ProductOffer getById(Long id){
+        return productRepository.findById(id).orElseThrow(RuntimeException::new);
     }
 
 

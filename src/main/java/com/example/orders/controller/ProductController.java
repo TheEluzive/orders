@@ -25,8 +25,4 @@ public class ProductController {
         return productService.register(request.getProviderId(), request.getProducts());
     }
 
-    public List<String> getReport(){
-        return null;
-    }
-
 }
