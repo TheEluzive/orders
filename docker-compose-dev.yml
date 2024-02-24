@@ -1,15 +1,9 @@
 version: '3.7'
 services:
-  order:
-    image: ghcr.io/theeluzive/order:latest
-    ports:
-      - "8095:8095"
-    depends_on:
-      - postgresql
-  postgresql:
+  db:
     image: postgres:16.2
     ports:
-      - "5432:5432"
+      - "5555:5432"
     environment:
       - POSTGRES_DB=app
       - POSTGRES_USER=app
