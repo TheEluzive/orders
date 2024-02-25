@@ -41,9 +41,6 @@ public class ProductService {
                 .collect(Collectors.toList());
     }
 
-    public ProductDto getById(Long id) {
-        return mapper.mapDaoToProductDto(productRepository.findById(id).orElseThrow(RuntimeException::new));
-    }
 
 
     public List<ProductDto> getAll(Pageable pageable) {
