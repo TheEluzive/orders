@@ -1,7 +1,10 @@
 package com.example.orders.service;
 
+import com.example.orders.exception.ProductNotFoundException;
+import com.example.orders.exception.WrongProductDataException;
 import com.example.orders.mapper.OrderMapper;
 import com.example.orders.model.dto.ReceiptDto;
+import com.example.orders.model.entity.ProductOfferEntity;
 import com.example.orders.model.entity.ReceiptEntity;
 import com.example.orders.model.dto.ReceiptRequestDto;
 import com.example.orders.model.entity.Report;
@@ -13,6 +16,7 @@ import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
 import java.util.List;
+import java.util.Objects;
 import java.util.stream.Collectors;
 
 @Service
@@ -23,15 +27,30 @@ public class ReceiptService {
     private final OrderMapper mapper;
 
     public List<ReceiptDto> register(List<ReceiptRequestDto> receipts) {
+        List<Long> productsOfferIds = receipts.stream().map(ReceiptRequestDto::getProductId).toList();
+        List<ProductOfferEntity> productOfferEntities = productRepository.findAllByIdIn(productsOfferIds);
         return receiptRepository.saveAll(receipts.stream().map(r -> {
-                    ReceiptEntity receiptEntity = new ReceiptEntity();
-                    receiptEntity.setProduct(productRepository.findById(r.getProductId()).orElseThrow(RuntimeException::new)); // todo: package
-                    receiptEntity.setAmount(r.getAmount());
-                    receiptEntity.setDateReceipt(LocalDate.now());
-                    return receiptEntity;
-                }).toList())
+                            try {
+                                ReceiptEntity receiptEntity = new ReceiptEntity();
+                                ProductOfferEntity productOffer = productOfferEntities.stream()
+                                        .filter(p -> p.getId() == r.getProductId())
+                                        .findFirst()
+                                        .orElseThrow(ProductNotFoundException::new);
+                                if (productOffer.getFromDate().isBefore(LocalDate.now()) && productOffer.getToDate().isAfter(LocalDate.now()))
+                                    receiptEntity.setProduct(productOffer);
+                                else throw new WrongProductDataException();
+                                receiptEntity.setAmount(r.getAmount());
+                                receiptEntity.setDateReceipt(LocalDate.now());
+                                return receiptEntity;
+                            } catch (RuntimeException e) {
+                                //TODO: add logger
+                            }
+                            return null; // TODO: fix it <->
+                        }).filter(Objects::nonNull)
+                        .toList())
                 .stream()
-                .map(mapper::mapDaoToReceiptDto).collect(Collectors.toList());
+                .map(mapper::mapDaoToReceiptDto)
+                .collect(Collectors.toList());
     }
 
 
@@ -44,4 +63,6 @@ public class ReceiptService {
     public List<Report> getReport(LocalDate fromDate, LocalDate toDate) {
         return receiptRepository.getSumWeightAndPriceByProvider(fromDate, toDate);
     }
+
+
 }

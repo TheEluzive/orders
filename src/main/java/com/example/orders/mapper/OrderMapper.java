@@ -1,9 +1,6 @@
 package com.example.orders.mapper;
 
-import com.example.orders.model.dto.ProductDto;
-import com.example.orders.model.dto.ProductRequestDto;
-import com.example.orders.model.dto.ProviderDto;
-import com.example.orders.model.dto.ReceiptDto;
+import com.example.orders.model.dto.*;
 import com.example.orders.model.entity.CategoryEntity;
 import com.example.orders.model.entity.ProductOfferEntity;
 import com.example.orders.model.entity.ProviderEntity;
@@ -35,20 +32,20 @@ public class OrderMapper {
     public ProductDto mapDaoToProductDto(ProviderEntity providerEntity, ProductOfferEntity productOffers) {
         ProductDto dto = mapDaoToProductDto(productOffers);
         if (Objects.nonNull(providerEntity))
-            dto.setProviderEntity(providerEntity);
-        dto.setProviderEntity(productOffers.getProviderEntity());
+            dto.setProvider(mapDaoToProviderDto(providerEntity));
+        dto.setProvider(mapDaoToProviderDto(productOffers.getProviderEntity()));
         return dto;
     }
     public ProductDto mapDaoToProductDto(ProductOfferEntity productOffers) {
         ProductDto dto = new ProductDto();
         dto.setId(productOffers.getId());
         dto.setName(productOffers.getName());
-        dto.setCategoryEntity(productOffers.getCategoryEntity());
+        dto.setCategory(mapDaoToCategoryDto(productOffers.getCategoryEntity()));
         dto.setWeight(productOffers.getWeight());
         dto.setPrice(productOffers.getPrice());
         dto.setFromDate(productOffers.getFromDate());
         dto.setToDate(productOffers.getToDate());
-        dto.setProviderEntity(productOffers.getProviderEntity());
+        dto.setProvider(mapDaoToProviderDto(productOffers.getProviderEntity()));
         return dto;
     }
 
@@ -63,6 +60,15 @@ public class OrderMapper {
         ReceiptDto dto = new ReceiptDto();
         dto.setAmount(entity.getAmount());
         dto.setProductDto(mapDaoToProductDto(entity.getProduct()));
+        dto.setDateReceipt(entity.getDateReceipt());
+
+        return dto;
+    }
+
+    public CategoryDto mapDaoToCategoryDto(CategoryEntity categoryEntity){
+        CategoryDto dto = new CategoryDto();
+        dto.setId(categoryEntity.getId());
+        dto.setName(categoryEntity.getName());
         return dto;
     }
 }

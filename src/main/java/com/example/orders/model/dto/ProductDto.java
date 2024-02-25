@@ -1,7 +1,6 @@
 package com.example.orders.model.dto;
 
 import com.example.orders.model.entity.CategoryEntity;
-import com.example.orders.model.entity.ProviderEntity;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -19,7 +18,7 @@ public class ProductDto {
 
     private String name;
 
-    private CategoryEntity categoryEntity;
+    private CategoryDto category;
 
     private Long weight;
 
@@ -29,6 +28,6 @@ public class ProductDto {
 
     private LocalDate toDate;
 
-    private ProviderEntity providerEntity;
+    private ProviderDto provider;
 
 }

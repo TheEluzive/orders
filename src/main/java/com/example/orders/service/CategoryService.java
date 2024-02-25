@@ -14,11 +14,6 @@ public class CategoryService {
 
     private final CategoryRepository categoryRepository;
 
-    public CategoryEntity getOrAdd(String name) {
-        return categoryRepository.findFirstByName(name)
-                .orElse(categoryRepository.save(new CategoryEntity(0L, name)));
-    }
-
     public List<CategoryEntity> getAllOrAdd(List<String> names){
         List<CategoryEntity> result = categoryRepository.findAllByNameIsIn(names);
 
