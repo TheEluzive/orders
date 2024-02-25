@@ -8,6 +8,6 @@ import java.util.List;
 
 public interface ProductRepository extends JpaRepository<ProductOfferEntity, Long> {
 
-    public List<ProductOfferEntity> findAllByIdIn(List<Long> ids);
+    List<ProductOfferEntity> findAllByIdIn(List<Long> ids);
 
 }

@@ -1,4 +1,4 @@
 package com.example.orders.exception;
 
-public class ProductNotFoundException extends RuntimeException{
+public class ProductNotFoundException extends NotFoundException{
 }

@@ -18,7 +18,7 @@ public interface ReceiptRepository extends JpaRepository<ReceiptEntity, Long> {
             "left join product_offer as product on receipt.product_id = product.id\n" +
             "left join base_product as base on receipt.product_id = base.id\n" +
             "group by provider_entity_id;")
-    public List<Report> getSumWeightAndPriceByProvider(@Param("fromDate") LocalDate fromDate, @Param("toDate") LocalDate toDate);
+    List<Report> getSumWeightAndPriceByProvider(@Param("fromDate") LocalDate fromDate, @Param("toDate") LocalDate toDate);
 
 
 

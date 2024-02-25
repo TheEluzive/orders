@@ -8,8 +8,8 @@ import java.util.Optional;
 
 public interface CategoryRepository extends JpaRepository<CategoryEntity, Long> {
 
-    public Optional<CategoryEntity> findFirstByName(String name);
+    Optional<CategoryEntity> findFirstByName(String name);
 
-    public List<CategoryEntity> findAllByNameIsIn(List<String> names);
+    List<CategoryEntity> findAllByNameIsIn(List<String> names);
 
 }

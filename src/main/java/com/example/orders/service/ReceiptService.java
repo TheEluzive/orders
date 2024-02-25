@@ -4,14 +4,14 @@ import com.example.orders.exception.ProductNotFoundException;
 import com.example.orders.exception.WrongProductDataException;
 import com.example.orders.mapper.OrderMapper;
 import com.example.orders.model.dto.ReceiptDto;
+import com.example.orders.model.dto.ReceiptRequestDto;
 import com.example.orders.model.entity.ProductOfferEntity;
 import com.example.orders.model.entity.ReceiptEntity;
-import com.example.orders.model.dto.ReceiptRequestDto;
 import com.example.orders.model.entity.Report;
 import com.example.orders.repository.ProductRepository;
 import com.example.orders.repository.ReceiptRepository;
-import lombok.AllArgsConstructor;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
@@ -21,6 +21,7 @@ import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
+@Slf4j
 public class ReceiptService {
     private final ProductRepository productRepository;
     private final ReceiptRepository receiptRepository;
@@ -42,8 +43,10 @@ public class ReceiptService {
                                 receiptEntity.setAmount(r.getAmount());
                                 receiptEntity.setDateReceipt(LocalDate.now());
                                 return receiptEntity;
-                            } catch (RuntimeException e) {
-                                //TODO: add logger
+                            } catch (ProductNotFoundException e) {
+                                log.error("Product wasn`t found, id: " + r.getProductId());
+                            } catch (WrongProductDataException e) {
+                                log.error("Wrong date in product to receipt, id: " + r.getProductId());
                             }
                             return null; // TODO: fix it <->
                         }).filter(Objects::nonNull)

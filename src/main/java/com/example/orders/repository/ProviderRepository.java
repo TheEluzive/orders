@@ -8,6 +8,6 @@ import java.util.Optional;
 
 public interface ProviderRepository extends JpaRepository<ProviderEntity, Long> {
 
-    public Optional<ProviderEntity> findByName(String name);
+    Optional<ProviderEntity> findByName(String name);
 
 }
