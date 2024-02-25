@@ -3,13 +3,12 @@ package com.example.orders.service;
 import com.example.orders.exception.ProviderNotFoundException;
 import com.example.orders.mapper.OrderMapper;
 import com.example.orders.model.dto.ProviderDto;
-import com.example.orders.model.entity.ProviderEntity;
 import com.example.orders.model.dto.ProviderRequestDto;
+import com.example.orders.model.entity.ProviderEntity;
 import com.example.orders.repository.ProviderRepository;
 import lombok.AllArgsConstructor;
-import lombok.extern.java.Log;
-import lombok.extern.log4j.Log4j2;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -34,8 +33,8 @@ public class ProviderService {
                 .map(mapper::mapDaoToProviderDto).collect(Collectors.toList());
     }
 
-    public List<ProviderDto> getAllProviders() {
-        return providerRepository.findAll().stream()
+    public List<ProviderDto> getAllProviders(Pageable pageable) {
+        return providerRepository.findAll(pageable).stream()
                 .map(mapper::mapDaoToProviderDto).collect(Collectors.toList());
     }
 

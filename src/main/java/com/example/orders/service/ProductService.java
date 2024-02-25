@@ -8,7 +8,9 @@ import com.example.orders.model.entity.ProductOfferEntity;
 import com.example.orders.model.entity.ProviderEntity;
 import com.example.orders.repository.ProductRepository;
 import lombok.AllArgsConstructor;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
+
 
 import java.util.ArrayList;
 import java.util.List;
@@ -44,8 +46,8 @@ public class ProductService {
     }
 
 
-    public List<ProductDto> getAll() {
-        return productRepository.findAll()
+    public List<ProductDto> getAll(Pageable pageable) {
+        return productRepository.findAll(pageable)
                 .stream()
                 .map(p -> mapper.mapDaoToProductDto(null, p))
                 .collect(Collectors.toList());

@@ -12,11 +12,12 @@ import java.util.List;
 
 public interface ReceiptRepository extends JpaRepository<ReceiptEntity, Long> {
 
-    @Query(nativeQuery = true, value = "select\n" +
-            "    provider_entity_id as providerId, sum(base.weight) as totalWeight, sum(price) as totalPrice\n" +
-            "from (select id, amount, product_id, date_receipt  from receipt where receipt.date_receipt between :fromDate AND :toDate) as receipt\n" +
-            "left join product_offer as product on receipt.product_id = product.id\n" +
-            "left join base_product as base on receipt.product_id = base.id\n" +
+    @Query(nativeQuery = true, value = "select provider_entity_id as providerId, sum(totalWeight) as totalWeight, sum(totalPrice) as totalPrice from\n" +
+            "(select\n" +
+            "price * receipt.amount as totalPrice, weight * receipt.amount as totalWeight, provider_entity_id\n" +
+            "            from (select id, amount, product_id, date_receipt  from receipt where receipt.date_receipt between :fromDate AND :toDate) as receipt\n" +
+            "            left join product_offer as product on receipt.product_id = product.id\n" +
+            "            left join base_product as base on receipt.product_id = base.id)\n" +
             "group by provider_entity_id;")
     List<Report> getSumWeightAndPriceByProvider(@Param("fromDate") LocalDate fromDate, @Param("toDate") LocalDate toDate);
 

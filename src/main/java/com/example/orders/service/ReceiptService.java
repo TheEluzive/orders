@@ -12,6 +12,7 @@ import com.example.orders.repository.ProductRepository;
 import com.example.orders.repository.ReceiptRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
@@ -57,8 +58,8 @@ public class ReceiptService {
     }
 
 
-    public List<ReceiptDto> getAll() {
-        return receiptRepository.findAll()
+    public List<ReceiptDto> getAll(Pageable pageable) {
+        return receiptRepository.findAll(pageable)
                 .stream()
                 .map(mapper::mapDaoToReceiptDto).collect(Collectors.toList());
     }

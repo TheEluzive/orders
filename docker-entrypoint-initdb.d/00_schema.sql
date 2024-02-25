@@ -63,3 +63,10 @@ create table receipt
 alter table receipt
     owner to app;
 
+
+
+alter sequence category_id_seq owned by category.id;
+
+
+alter sequence provider_id_seq owned by provider.id;
+

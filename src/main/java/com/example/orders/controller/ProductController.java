@@ -1,9 +1,10 @@
 package com.example.orders.controller;
 
-import com.example.orders.model.*;
+import com.example.orders.model.ProductRequest;
 import com.example.orders.model.dto.ProductDto;
 import com.example.orders.service.ProductService;
 import lombok.AllArgsConstructor;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -16,8 +17,9 @@ public class ProductController {
     private final ProductService productService;
 
     @GetMapping("/getAll")
-    public List<ProductDto> getAll(){
-        return productService.getAll();
+    public List<ProductDto> getAll( @RequestParam(value = "offset")  Integer offset,
+                                    @RequestParam(value = "limit") Integer limit){
+        return productService.getAll(PageRequest.of(offset, limit));
     }
 
 

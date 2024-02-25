@@ -1,0 +1,179 @@
+### 1) создаем поставщика
+POST http://localhost:8095/provider/register
+Content-Type: application/json
+
+{"providers": [
+  {
+    "name" : "Gardens of Kuban"
+  },
+  {
+    "name" : "Gardens of Pridonie"
+  }
+
+]}
+
+
+
+### 2) регистрируем продукты
+###
+POST http://localhost:8095/product/register
+Content-Type: application/json
+
+{
+  "providerId": 1,
+  "products": [
+    {
+      "name": "Golden",
+
+      "category": "Pear",
+
+      "price" : 100,
+
+      "weight": 200,
+
+
+
+      "fromDate": "2024-02-01",
+
+      "toDate": "2024-03-29"
+
+    },
+    {
+      "name": "Speloe",
+
+      "category": "Apples",
+
+      "price" : 100000,
+
+      "weight": 1000,
+
+
+
+      "fromDate": "2024-02-01",
+
+      "toDate": "2024-02-20"
+    },
+    {
+      "name": "Malenkoe",
+
+      "category": "Apples",
+
+      "price" : 100000,
+
+      "weight": 1000,
+
+
+
+      "fromDate": "2024-02-01",
+
+      "toDate": "2024-03-29"
+    }
+  ]
+}
+
+
+
+### 2.2) регистрируем продукты от другого поставщика
+###
+POST http://localhost:8095/product/register
+Content-Type: application/json
+
+{
+  "providerId": 2,
+  "products": [
+    {
+      "name": "Golden2",
+
+      "category": "Pear",
+
+      "price" : 100,
+
+      "weight": 200,
+
+
+
+      "fromDate": "2024-02-01",
+
+      "toDate": "2024-03-29"
+
+    },
+    {
+      "name": "Speloe2",
+
+      "category": "Apples",
+
+      "price" : 100000,
+
+      "weight": 1000,
+
+
+
+      "fromDate": "2024-02-01",
+
+      "toDate": "2024-02-20"
+    },
+    {
+      "name": "Malenkoe2",
+
+      "category": "Apples",
+
+      "price" : 100000,
+
+      "weight": 1000,
+
+
+
+      "fromDate": "2024-02-01",
+
+      "toDate": "2024-03-29"
+    }
+  ]
+}
+
+
+
+
+### 3) Регистрируем отгрузку некоторых продуктов
+POST http://localhost:8095/receipt/register
+Content-Type: application/json
+
+{
+
+  "receipts": [
+    {
+      "productId": 1,
+      "amount": 900
+
+    },
+    {
+
+      "productId": 2,
+      "amount": 44
+    },
+    {
+
+      "productId": 3,
+      "amount": 20
+    },
+    {
+
+      "productId": 999,
+      "amount": 1
+    }
+  ]
+}
+
+
+
+### 4) Смотрим отчёт
+POST http://localhost:8095/receipt/getReport
+Content-Type: application/json
+
+{
+	"fromDate": "2024-02-20",
+	"toDate": "2024-02-29"
+}
+
+
+
+
