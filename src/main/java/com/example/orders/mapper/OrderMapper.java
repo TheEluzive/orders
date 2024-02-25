@@ -20,7 +20,7 @@ public class OrderMapper {
         offer.setName(products.getName());
         offer.setCategoryEntity(categories.stream()
                 .filter(c-> !c.getName().equals(products.getCategory()))
-                .findFirst().orElseThrow(RuntimeException::new));
+                .findFirst().orElseGet(null));
         offer.setPrice(products.getPrice());
         offer.setWeight(products.getWeight());
         offer.setProviderEntity(providerEntity);
