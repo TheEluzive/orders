@@ -29,11 +29,8 @@ public class ReceiptService {
     private final OrderMapper mapper;
 
     public List<ReceiptDto> register(List<ReceiptRequestDto> receipts) {
-        log.info(receipts.toString());
         List<Long> productsOfferIds = receipts.stream().map(ReceiptRequestDto::getProductId).toList();
-        log.info("1");
         List<ProductOfferEntity> productOfferEntities = productRepository.findAllByIdIn(productsOfferIds);
-        log.info("2");
         return receiptRepository.saveAll(receipts.stream().map(r -> {
                             try {
                                 ReceiptEntity receiptEntity = new ReceiptEntity();
