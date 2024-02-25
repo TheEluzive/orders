@@ -1,15 +1,13 @@
-package com.example.orders.model;
+package com.example.orders.model.dto;
 
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-import java.util.List;
-
-
 
 @NoArgsConstructor
 @Getter @Setter
 public class ProviderDto {
+    private Long id;
     private String name;
 }

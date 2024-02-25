@@ -1,16 +1,13 @@
 package com.example.orders.repository;
 
-import com.example.orders.model.Provider;
-import lombok.AllArgsConstructor;
-import lombok.NoArgsConstructor;
+import com.example.orders.model.entity.ProviderEntity;
 import org.springframework.data.jpa.repository.JpaRepository;
-import org.springframework.stereotype.Repository;
 
 import java.util.Optional;
 
 
-public interface ProviderRepository extends JpaRepository<Provider, Long> {
+public interface ProviderRepository extends JpaRepository<ProviderEntity, Long> {
 
-    public Optional<Provider> findByName(String name);
+    public Optional<ProviderEntity> findByName(String name);
 
 }

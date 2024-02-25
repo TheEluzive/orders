@@ -1,4 +1,4 @@
-package com.example.orders.model;
+package com.example.orders.model.entity;
 
 import jakarta.persistence.*;
 import lombok.*;
@@ -11,7 +11,8 @@ import java.time.LocalDate;
 @Setter
 //@Builder
 @Entity
-public class ProductOffer extends BaseProduct{
+@Table(name = "product_offer")
+public class ProductOfferEntity extends BaseProductEntity {
 //    @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
 //    @Column(name = "id",unique=true, nullable = false)
 //    private Long id;
@@ -24,5 +25,5 @@ public class ProductOffer extends BaseProduct{
     private LocalDate toDate;
 
     @ManyToOne
-    private Provider provider;
+    private ProviderEntity providerEntity;
 }

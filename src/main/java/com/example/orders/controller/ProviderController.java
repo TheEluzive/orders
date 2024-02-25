@@ -1,8 +1,8 @@
 package com.example.orders.controller;
 
 import com.example.orders.model.ProviderRequest;
+import com.example.orders.model.dto.ProviderDto;
 import com.example.orders.service.ProviderService;
-import com.example.orders.model.Provider;
 import lombok.AllArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
@@ -17,12 +17,12 @@ public class ProviderController {
 
     //todo:: webMessage
     @PostMapping("/register")
-    public List<Provider> registerProvider(@RequestBody ProviderRequest request){
+    public List<ProviderDto> registerProvider(@RequestBody ProviderRequest request){
         return providerService.registerProvider(request.getProviders());
     }
 
     @GetMapping("/getAll")
-    public List<Provider> getAllProviders(){
+    public List<ProviderDto> getAllProviders(){
         return providerService.getAllProviders();
     }
 

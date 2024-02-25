@@ -1,5 +1,6 @@
 package com.example.orders.model;
 
+import com.example.orders.model.dto.ReceiptRequestDto;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -12,5 +13,5 @@ import java.util.List;
 @Getter
 @Setter
 public class ReceiptRequest {
-    private List<ReceiptDto> receipts;
+    private List<ReceiptRequestDto> receipts;
 }

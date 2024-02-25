@@ -1,4 +1,4 @@
-package com.example.orders.model;
+package com.example.orders.model.entity;
 
 import jakarta.persistence.*;
 import lombok.*;
@@ -9,7 +9,8 @@ import lombok.*;
 @Setter
 @Builder
 @Entity
-public class Category {
+@Table(name = "category")
+public class CategoryEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id",unique=true, nullable = false)

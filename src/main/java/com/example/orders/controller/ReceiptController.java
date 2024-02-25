@@ -1,11 +1,14 @@
 package com.example.orders.controller;
 
 import com.example.orders.model.*;
+import com.example.orders.model.dto.ReceiptDto;
+import com.example.orders.model.dto.ReportRequestDto;
+import com.example.orders.model.entity.ReceiptEntity;
+import com.example.orders.model.entity.Report;
 import com.example.orders.service.ReceiptService;
 import lombok.AllArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
-import java.time.LocalDate;
 import java.util.List;
 
 @RestController
@@ -16,18 +19,18 @@ public class ReceiptController {
     private final ReceiptService receiptService;
 
     @GetMapping("/getAll")
-    public List<Receipt> getAll(){
+    public List<ReceiptDto> getAll(){
         return receiptService.getAll();
     }
 
     @PostMapping("/register")
-    public List<Receipt> registerReceipt(@RequestBody ReceiptRequest request){
+    public List<ReceiptDto> registerReceipt(@RequestBody ReceiptRequest request){
         return receiptService.register(request.getReceipts());
     }
 
     @PostMapping("/getReport")
-    public List<Report> getReport(@RequestBody ReportDto reportDto){
-        return receiptService.getReport(reportDto.getFromDate(), reportDto.getToDate());
+    public List<Report> getReport(@RequestBody ReportRequestDto reportRequestDto){
+        return receiptService.getReport(reportRequestDto.getFromDate(), reportRequestDto.getToDate());
     }
 
 }

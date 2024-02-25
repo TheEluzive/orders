@@ -1,7 +1,7 @@
 package com.example.orders.repository;
 
-import com.example.orders.model.Receipt;
-import com.example.orders.model.Report;
+import com.example.orders.model.entity.ReceiptEntity;
+import com.example.orders.model.entity.Report;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
@@ -10,7 +10,7 @@ import java.time.LocalDate;
 import java.util.List;
 
 
-public interface ReceiptRepository extends JpaRepository<Receipt, Long> {
+public interface ReceiptRepository extends JpaRepository<ReceiptEntity, Long> {
 
     @Query(nativeQuery = true, value = "select\n" +
             "    provider_id as providerId, sum(base.weight) as totalWeight, sum(price) as totalPrice\n" +

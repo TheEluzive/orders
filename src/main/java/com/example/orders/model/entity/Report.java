@@ -1,4 +1,4 @@
-package com.example.orders.model;
+package com.example.orders.model.entity;
 
 import jakarta.persistence.Column;
 import lombok.AllArgsConstructor;

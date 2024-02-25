@@ -1,8 +1,5 @@
-package com.example.orders.model;
+package com.example.orders.model.dto;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.ManyToOne;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -14,7 +11,7 @@ import java.time.LocalDate;
 @NoArgsConstructor
 @Getter
 @Setter
-public class ProductDto {
+public class ProductRequestDto {
 
     private String name;
 

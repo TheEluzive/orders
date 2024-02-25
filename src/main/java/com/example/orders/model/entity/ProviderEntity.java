@@ -1,4 +1,4 @@
-package com.example.orders.model;
+package com.example.orders.model.entity;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
@@ -12,14 +12,15 @@ import java.util.List;
 @Getter @Setter
 @Builder
 @Entity
-public class Provider {
+@Table(name = "provider")
+public class ProviderEntity {
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id",unique=true, nullable = false)
     private Long id;
 
     private String name;
 
-    @OneToMany(mappedBy = "provider")
+    @OneToMany(mappedBy = "providerEntity")
     @JsonIgnore
-    private List<ProductOffer> productOfferList;
+    private List<ProductOfferEntity> productOfferList;
 }

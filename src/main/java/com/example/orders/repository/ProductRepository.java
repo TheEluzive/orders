@@ -1,11 +1,10 @@
 package com.example.orders.repository;
 
-import com.example.orders.model.ProductOffer;
+import com.example.orders.model.entity.ProductOfferEntity;
 import org.springframework.data.jpa.repository.JpaRepository;
-import org.springframework.stereotype.Repository;
 
 
-public interface ProductRepository extends JpaRepository<ProductOffer, Long> {
+public interface ProductRepository extends JpaRepository<ProductOfferEntity, Long> {
 
 
 

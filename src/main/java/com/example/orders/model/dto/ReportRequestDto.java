@@ -1,4 +1,4 @@
-package com.example.orders.model;
+package com.example.orders.model.dto;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -11,7 +11,7 @@ import java.time.LocalDate;
 @NoArgsConstructor
 @Getter
 @Setter
-public class ReportDto {
+public class ReportRequestDto {
     private LocalDate fromDate;
     private LocalDate toDate;
 }

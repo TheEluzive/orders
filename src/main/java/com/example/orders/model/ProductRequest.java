@@ -1,5 +1,6 @@
 package com.example.orders.model;
 
+import com.example.orders.model.dto.ProductRequestDto;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -13,5 +14,5 @@ import java.util.List;
 @Getter @Setter
 public class ProductRequest {
     private Long providerId;
-    private List<ProductDto> products;
+    private List<ProductRequestDto> products;
 }

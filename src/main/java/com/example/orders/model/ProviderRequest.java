@@ -1,5 +1,6 @@
 package com.example.orders.model;
 
+import com.example.orders.model.dto.ProviderRequestDto;
 import lombok.*;
 
 import java.util.List;
@@ -9,5 +10,5 @@ import java.util.List;
 @AllArgsConstructor
 @Getter @Setter
 public class ProviderRequest {
-    private List<ProviderDto> providers;
+    private List<ProviderRequestDto> providers;
 }
